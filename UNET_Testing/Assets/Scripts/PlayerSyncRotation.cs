@@ -12,6 +12,10 @@ public class PlayerSyncRotation : NetworkBehaviour
     [SyncVar] private Quaternion _syncPlayerRotation;
     [SyncVar] private Quaternion _syncCameraRotation;
 
+    private Quaternion _lastPlayerRotation;
+    private Quaternion _lastCameraRotation;
+    private float _threshold = 5;
+
     void FixedUpdate()
     {
         TransmitRotations();
@@ -35,6 +39,8 @@ public class PlayerSyncRotation : NetworkBehaviour
     [Command]
     void CmdProvideRotationsToServer(Quaternion playerRotation, Quaternion cameraRotation)
     {
+        //Debug.Log("Receiving updated network rotation");
+
         _syncPlayerRotation = playerRotation;
         _syncCameraRotation = cameraRotation;
     }
@@ -43,6 +49,16 @@ public class PlayerSyncRotation : NetworkBehaviour
     void TransmitRotations()
     {
         if (isLocalPlayer)
-            CmdProvideRotationsToServer(_playerTransform.rotation, _cameraTransform.rotation);
+        {
+            // only transmit network data when player/camera has rotated more than threshold degrees
+            if (Quaternion.Angle(_playerTransform.rotation, _lastPlayerRotation) > _threshold ||
+                Quaternion.Angle(_cameraTransform.rotation, _lastCameraRotation) > _threshold)
+            {
+                CmdProvideRotationsToServer(_playerTransform.rotation, _cameraTransform.rotation);
+                _lastPlayerRotation = _playerTransform.rotation;
+                _lastCameraRotation = _cameraTransform.rotation;
+            }
+        }
+            
     }
 }
