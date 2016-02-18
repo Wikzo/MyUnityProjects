@@ -32,8 +32,8 @@ GameObject:
   - 23: {fileID: 2368472}
   - 33: {fileID: 3374826}
   - 114: {fileID: 11432554}
-  - 114: {fileID: 11435610}
   - 114: {fileID: 11400448}
+  - 114: {fileID: 11439762}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5927e064df3a164d96e845dfeb5e385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraController: {fileID: 196186}
+  FirstPersonCharacterObject: {fileID: 196186}
 --- !u!114 &11421316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -431,7 +431,7 @@ MonoBehaviour:
     i15: 101
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &11435610
+--- !u!114 &11439762
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -439,18 +439,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 192332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Script: {fileID: 11500000, guid: d53b9ffdfde8e8e4fb891d52b7f4d186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  _myTransform: {fileID: 497496}
+  _lerpRate: 15
 --- !u!143 &14398414
 CharacterController:
   m_ObjectHideFlags: 1
