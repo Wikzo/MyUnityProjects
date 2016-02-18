@@ -9,8 +9,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerNetworkSetup : NetworkBehaviour
 {
 
-    [SerializeField] public GameObject FirstPersonCharacterObject;
-
+    [SerializeField] private Camera _fpsCamera;
+    [SerializeField] private AudioListener _audioListener;
     void Start()
     {
         if (isLocalPlayer)
@@ -18,7 +18,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
             GameObject.Find("SceneCamera").SetActive(false);
             GetComponent<CharacterController>().enabled = true;
             GetComponent<FirstPersonController>().enabled = true;
-            FirstPersonCharacterObject.SetActive(true);
+            _fpsCamera.enabled = true;
+            _audioListener.enabled = true;
         }
     }
 }
